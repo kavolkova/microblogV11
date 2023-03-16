@@ -10,7 +10,7 @@ class Config(object):
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    MAIL_USERNAME = os.environ.get('atcspacker@gmail.com')
+    MAIL_PASSWORD = os.environ.get('youwillneverguess')
     ADMINS = ['your-email@example.com']
     POSTS_PER_PAGE = 25
