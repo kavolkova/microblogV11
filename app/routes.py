@@ -7,6 +7,7 @@ from app.forms import LoginForm, RegistrationForm, EditProfileForm, \
     EmptyForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
 from app.models import User, Post
 from app.email import send_password_reset_email
+from app.forms import Cart
 
 
 @app.before_request
@@ -14,6 +15,16 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+
+@app.route('/cart', methods=['GET', 'POST'])
+@login_required
+def cart():
+    form = Cart()
+    form.item.choices = ['snickers','kitkat']
+    if form.validate_on_submit():
+        flash('You bought '+str(form.quantity.data)+' of '+form.item.data)
+        return redirect(url_for('index'))
+    return render_template('cart.html', form=form)
 
 
 @app.route('/', methods=['GET', 'POST'])

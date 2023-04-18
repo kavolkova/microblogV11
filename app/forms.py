@@ -1,10 +1,14 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, \
-    TextAreaField
+    TextAreaField, IntegerField, RadioField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, \
     Length
 from app.models import User
 
+class Cart(FlaskForm):
+    item = RadioField('item')
+    quantity = IntegerField('Quanity')
+    submit = SubmitField('Check Out')
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
