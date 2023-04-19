@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, \
-    TextAreaField
+    TextAreaField, IntegerField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, \
     Length
 from app.models import User
@@ -67,3 +67,8 @@ class EmptyForm(FlaskForm):
 class PostForm(FlaskForm):
     post = TextAreaField('Say something', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+class CartForm(FlaskForm):
+    item = TextAreaField('Enter an item', validators=[DataRequired()])
+    amount = IntegerField('How many do you want?', validators=[DataRequired()])
+    submit = SubmitField('Add to cart')

@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.urls import url_parse
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, \
-    EmptyForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
+    EmptyForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm, CartForm
 from app.models import User, Post
 from app.email import send_password_reset_email
 
@@ -194,3 +194,13 @@ def unfollow(username):
         return redirect(url_for('user', username=username))
     else:
         return redirect(url_for('index'))
+
+
+@app.route('/cart', methods = ['GET', 'POST'])
+@login_required
+def cart():
+    form = CartForm()
+    if form.validate_on_submit():
+        flash(str(form.amount.data) + " " + form.item.data+ " added to cart :)")
+        return redirect(url_for('index'))
+    return render_template('cart.html', form=form)
